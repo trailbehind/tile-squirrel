@@ -1,0 +1,10 @@
+{
+  "topo": {
+    "source": "tmsource:///Users/jesse/projects/tm2-projects-private/osm_topo_feet.tm2source/",
+    "destination": "s3simple://gaiamarinetilestest/topoqueue2/"
+  },
+  "topo2": {
+    "source": "tmsource:///Users/jesse/projects/tm2-projects-private/osm_topo_feet.tm2source/",
+    "destination": "mbtiles:///Users/jesse/Desktop/topo2-tiles.mbtiles"
+  }
+}
