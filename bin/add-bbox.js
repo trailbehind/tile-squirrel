@@ -2,7 +2,8 @@
 
 "use strict";
 var debug = debug = require("debug")("tile-squirrel-add-bbox"),
-  SphericalMercator = require("SphericalMercator");
+  SphericalMercator = require("SphericalMercator"),
+  QueueWriter =  require("../lib/queueWriter");
 
 var nomnom = require("nomnom")
   .options({
@@ -56,7 +57,7 @@ if(!opts.zoom) {
   process.exit(-1);
 }
 
-if(opts.sources.length == 0) {
+if(!opts.sources || opts.sources.length == 0) {
   console.log("At least 1 source name is required.");
   process.exit(-1);
 }
@@ -94,11 +95,7 @@ var merc = new SphericalMercator({
     size: 256
 });
 
-var keys = [];
-
-for(var sourceIndex = 0; sourceIndex < opts.sources.length; sourceIndex++) {
-  var sourceName = opts.sources[sourceIndex];
-  debug("source: " + sourceName);
+function iterateTiles(queueWriter) {
   for(var zoom = minZoom; zoom <= maxZoom; zoom++) {
     var tileBounds = merc.xyz(bbox, zoom);
     debug(zoom, tileBounds);
@@ -120,25 +117,14 @@ for(var sourceIndex = 0; sourceIndex < opts.sources.length; sourceIndex++) {
           yRangeString = y.toString() + "-" + maxY.toString();
         }
         var tileRangeName = zoomString + "/" + xRangeString + "/" +  yRangeString;
-        var key = sourceName + "+" + tileRangeName;
-        keys.push(key);
-        debug(key);
+        debug(tileRangeName);
+        queueWriter.putTile(tileRangeName);
       }
     }
   }
-}
+  queueWriter.tileStream.end();
+};
 
-var context = require('rabbit.js').createContext('amqp://localhost');
-
-context.on('ready', function() {
-  var pub = context.socket('PUSH');
-  pub.connect('tiles', function() {
-    for(var i = 0; i < keys.length; i++) {
-      pub.write(keys[i], 'utf8');      
-    }
-    setTimeout(function() {
-        process.exit(0)
-    }, 1);
-  });
+new QueueWriter(opts.sources, {}, function(err, queueWriter) {
+  iterateTiles(queueWriter);
 });
-

@@ -2,14 +2,10 @@
 
 "use strict";
 
-var context = require('rabbit.js').createContext('amqp://localhost');
+var debug =  require("debug")("tile-squirrel-add-tile"),
+  QueueWriter =  require("../lib/queueWriter");
 
-context.on('ready', function() {
-  var pub = context.socket('PUSH');
-  pub.connect('tiles', function() {
-    pub.write(process.argv[2], 'utf8');
-    setTimeout(function() {
-        process.exit(0)
-    }, 1);
-  });
+new QueueWriter([process.argv[2]], {}, function(err, queueWriter) {
+    queueWriter.putTile(process.argv[3]);
+    queueWriter.tileStream.end();
 });
