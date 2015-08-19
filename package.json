@@ -15,7 +15,7 @@
     "debug": "^2.1.3",
     "nomnom": "^1.8.1",
     "tilelive": "^5.3.3",
-    "tilelive-modules": "^0.1.2",
+    "tilelive-modules": "git://github.com/JesseCrocker/tilelive-modules.git",
     "rabbit.js": "0.4.x",
     "q": "1.4.x",
     "sphericalmercator": "1.x"
