@@ -18,6 +18,7 @@
     "tilelive-modules": "git://github.com/JesseCrocker/tilelive-modules.git",
     "rabbit.js": "0.4.x",
     "q": "1.4.x",
-    "sphericalmercator": "1.x"
+    "sphericalmercator": "1.x",
+    "split": "1.x"
   }
 }
