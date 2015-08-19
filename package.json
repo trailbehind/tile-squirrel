@@ -17,6 +17,7 @@
     "tilelive": "^5.3.3",
     "tilelive-modules": "^0.1.2",
     "rabbit.js": "0.4.x",
-    "q": "1.4.x"
+    "q": "1.4.x",
+    "sphericalmercator": "1.x"
   }
 }
