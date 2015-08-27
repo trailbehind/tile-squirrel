@@ -65,7 +65,6 @@ if(!opts.sources || opts.sources.length == 0) {
 var minZoom = 0,
   maxZoom = 0;
 
-console.log(typeof opts.zoom);
 if((typeof opts.zoom) === "number") {
   minZoom = maxZoom = opts.zoom;
 } else if(opts.zoom.toString().search("-") == -1) {
@@ -80,6 +79,8 @@ if((typeof opts.zoom) === "number") {
   minZoom = parseInt(zoomComponents[0]);
   maxZoom = parseInt(zoomComponents[1]);
 }
+
+debug("Zoom range: " + minZoom + "-" + maxZoom);
 
 var bbox = opts.bbox.split(",");
 if(bbox.length != 4) {
