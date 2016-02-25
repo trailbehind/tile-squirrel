@@ -2,6 +2,7 @@
 
 "use strict";
 var debug = debug = require("debug")("tile-squirrel-add-bbox"),
+  path = require("path"),
   SphericalMercator = require("SphericalMercator"),
   QueueWriter =  require("../lib/queueWriter");
 
@@ -60,6 +61,17 @@ if(!opts.zoom) {
 if(!opts.sources || opts.sources.length == 0) {
   console.log("At least 1 source name is required.");
   process.exit(-1);
+}
+
+//Check if source exists if a config was specified
+if(opts.config) {
+  var config = require(path.resolve(opts.config));
+  for (var i = 0; i < opts.sources.length; i++) {
+    if(!config[opts.sources[i]]) {
+      console.log("Source " + opts.sources[i] + " not found in config");
+      process.exit(-1);
+    }
+  }
 }
 
 var minZoom = 0,
