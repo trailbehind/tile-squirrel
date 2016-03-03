@@ -16,7 +16,8 @@ var nomnom = require("nomnom")
     config: {
       abbr: "c",
       metavar: "CONFIG",
-      help: "Provide a configuration file"
+      help: "Provide a configuration file. Configuration file is not needed," + 
+      " but if it is provided sources will be verified to exist in config."
     },
     zoom: {
       abbr: "z",
@@ -32,12 +33,12 @@ var nomnom = require("nomnom")
     },
     xSize: {
       metavar: "size",
-      help: "Max x size",
+      help: "Max x size of chunks.",
       default: 8
     },
     ySize: {
       metavar: "size",
-      help: "Max y size",
+      help: "Max y size of chunks.",
       default: 8
     },
     version: {
@@ -49,7 +50,7 @@ var nomnom = require("nomnom")
       }
     }
   })
-  .help("A zoom, or range of zooms is required.");
+  .help("A zoom, or range of zooms, and one or more sources is required.");
 
 var opts = nomnom.parse();
 

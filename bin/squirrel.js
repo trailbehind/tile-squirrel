@@ -24,7 +24,7 @@ var nomnom = require("nomnom")
       }
     }
   })
-  .help("A tilelive URI or configuration file is required.");
+  .help("A configuration file is required.");
 
 var argv = (process.env.TILESQUIRREL_OPTS || "")
   .split(" ")
@@ -39,7 +39,7 @@ switch (true) {
 case opts.version:
   return process.exit();
 
-case !opts.uri && !opts.config:
+case !opts.config:
   return nomnom.print(nomnom.getUsage());
 
 default:
