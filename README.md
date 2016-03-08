@@ -67,6 +67,20 @@ Options:
 Queue a single tile
 ```
 
+### copy-info.js
+Copy metadata from a source to a sink
+
+```
+Usage: node copy-info.js [sources]... [options]
+
+sources     source names to queue
+
+Options:
+   -c CONFIG, --config CONFIG   Configuration file.
+   -v, --version                Show version info
+
+Copy metadata from a source to a sink.
+```
 
 ## Configuration
 
