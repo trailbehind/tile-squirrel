@@ -3,7 +3,8 @@
 "use strict";
 
 var debug =  require("debug")("tile-squirrel-add-tile"),
-  QueueWriter =  require("../lib/queueWriter");
+  QueueWriter =  require("../lib/queueWriter"),
+  path = require("path");
 
 
 var nomnom = require("nomnom")
@@ -48,7 +49,7 @@ if(opts.config) {
   }
 }
 
-new QueueWriter(opts.source, {}, function(err, queueWriter) {
+new QueueWriter([opts.source], {}, function(err, queueWriter) {
   queueWriter.putTile(opts.tile);
   queueWriter.tileStream.end();
 });
