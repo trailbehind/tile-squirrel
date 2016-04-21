@@ -3,7 +3,7 @@
 "use strict";
 var debug = debug = require("debug")("tile-squirrel-add-bbox"),
   path = require("path"),
-  SphericalMercator = require("SphericalMercator"),
+  SphericalMercator = require("sphericalmercator"),
   QueueWriter =  require("../lib/queueWriter");
 
 var nomnom = require("nomnom")
