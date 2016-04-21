@@ -43,5 +43,27 @@ case !opts.config:
   return nomnom.print(nomnom.getUsage());
 
 default:
-  return require("../lib/cacher")(opts);
+  return run(opts);
+}
+
+function run(opts) {
+  // increase the libuv threadpool size to 1.5x the number of logical CPUs.
+  process.env.UV_THREADPOOL_SIZE = process.env.UV_THREADPOOL_SIZE || 2;
+  var cluster = require('cluster'),
+    numCPUs = require('os').cpus().length;
+
+  var numworkers = process.env.WORKER_COUNT || numCPUs; 
+  if (cluster.isMaster) {
+    // Fork workers.
+    for (var i = 0; i < numworkers; i++) {
+      cluster.fork();
+    }
+  
+    cluster.on('exit', (worker, code, signal) => {
+      console.log(`worker ${worker.process.pid} died`);
+    });
+  } else {
+    console.log("Starting worker");
+    require("../lib/cacher")(opts);
+  }
 }
