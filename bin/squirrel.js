@@ -2,7 +2,7 @@
 
 "use strict";
 
-process.env.UV_THREADPOOL_SIZE = process.env.UV_THREADPOOL_SIZE || 2;
+process.env.UV_THREADPOOL_SIZE = process.env.UV_THREADPOOL_SIZE || 4;
 
 var nomnom = require("nomnom")
   .options({
