@@ -2,6 +2,9 @@
 
 "use strict";
 
+// increase the libuv threadpool size to 1.5x the number of logical CPUs.
+process.env.UV_THREADPOOL_SIZE = process.env.UV_THREADPOOL_SIZE || require('os').cpus().length;
+
 var nomnom = require("nomnom")
   .options({
     config: {
@@ -47,8 +50,6 @@ default:
 }
 
 function run(opts) {
-  // increase the libuv threadpool size to 1.5x the number of logical CPUs.
-  process.env.UV_THREADPOOL_SIZE = process.env.UV_THREADPOOL_SIZE || 2;
   var cluster = require('cluster'),
     numCPUs = require('os').cpus().length;
 
