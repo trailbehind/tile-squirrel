@@ -105,5 +105,6 @@ The configuration file aims to be compatible with [Tessera](https://github.com/m
 ### Environment variables
 * `AMPQ_HOST` - RabbitMQ host to connect to. Defaults to `localhost`.
 * `AMPQ_TOPIC` - RabbitMQ topic to use. Defaults to `tiles`.
-* `UV_THREADPOOL_SIZE` - Threadpool size to use. defaults to `max(4, cpus * 1.5)`
+* `UV_THREADPOOL_SIZE` - Threadpool size to use. defaults to `4`
 * `TILESQUIRREL_OPTS` - Additional command line arguments.
+* `WORKER_COUNT` = Number of worker threads to start. Defaults to the number of cpu cores.
