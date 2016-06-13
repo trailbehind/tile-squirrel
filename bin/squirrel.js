@@ -24,6 +24,11 @@ var nomnom = require("nomnom")
       callback: function() {
         return "tile-squirrel v" + require("../package.json").version;
       }
+    },
+    stdin: {
+      abbr: "s",
+      flag: true,
+      help: "Read messages from stdin instead of RabbitMQ"
     }
   })
   .help("A configuration file is required.");
@@ -43,6 +48,9 @@ case opts.version:
 
 case !opts.config:
   return nomnom.print(nomnom.getUsage());
+
+case opts.stdin:
+  return runStdin(opts);
 
 default:
   return run(opts);
@@ -66,4 +74,8 @@ function run(opts) {
     console.log("Starting worker");
     require("../lib/cacher")(opts);
   }
+}
+
+function runStdin(opts) {
+  require("../lib/cacher")(opts);
 }
