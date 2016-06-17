@@ -19,6 +19,11 @@ var nomnom = require("nomnom")
       help: "Provide a configuration file. Configuration file is not needed," + 
       " but if it is provided sources will be verified to exist in config."
     },
+    dryRun: {
+      abbr: "d",
+      flag: true,
+      help: "Dry run. Don't actually add messages to queue.",
+    },
     zoom: {
       abbr: "z",
       metavar: "ZOOM",
@@ -139,6 +144,6 @@ function iterateTiles(queueWriter) {
   queueWriter.tileStream.end();
 };
 
-new QueueWriter(opts.sources, {}, function(err, queueWriter) {
+new QueueWriter(opts.sources, {dryRun:opts.dryRun}, function(err, queueWriter) {
   iterateTiles(queueWriter);
 });
