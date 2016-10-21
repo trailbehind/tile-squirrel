@@ -16,11 +16,11 @@
   "dependencies": {
     "debug": "^2.1.0",
     "nomnom": "^1.8.1",
-    "tilelive": "5.x",
-    "tilelive-modules": "0.x",
-    "rabbit.js": "0.4.x",
     "q": "1.4.x",
+    "rabbit.js": "0.4.x",
     "sphericalmercator": "1.x",
-    "split": "1.x"
+    "split": "1.x",
+    "tilelive": "5.x",
+    "tilelive-modules": "0.x"
   }
 }
