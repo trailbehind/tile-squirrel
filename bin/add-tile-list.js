@@ -36,7 +36,7 @@ if(!opts.sources || opts.sources.length == 0) {
 
 new QueueWriter(opts.sources, {}, function(err, queueWriter) {
   var pipe = process.stdin.pipe(require('split')());
-  pipe.on('data', function processLine (line) {
+  pipe.on('data', function(line) {
     if(line.length) {
       queueWriter.putTile(line);
     }

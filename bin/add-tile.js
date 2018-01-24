@@ -50,6 +50,7 @@ if(opts.config) {
 }
 
 new QueueWriter([opts.source], {}, function(err, queueWriter) {
-  queueWriter.putTile(opts.tile);
-  queueWriter.tileStream.end();
+  queueWriter.putTile(opts.tile, function(){
+    queueWriter.tileStream.end();
+  });
 });
