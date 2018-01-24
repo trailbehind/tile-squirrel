@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 "use strict";
-var debug =  require("debug")("tile-squirrel-add-tile-list"),
-  QueueWriter =  require("../lib/queueWriter");
+var debug = require("debug")("tile-squirrel-add-tile-list"),
+  QueueWriter = require("../lib/queueWriter");
 
 var nomnom = require("nomnom")
   .options({
@@ -29,19 +29,19 @@ var nomnom = require("nomnom")
 
 var opts = nomnom.parse();
 
-if(!opts.sources || opts.sources.length == 0) {
+if (!opts.sources || opts.sources.length == 0) {
   console.log("At least 1 source name is required.");
   process.exit(-1);
 }
 
 new QueueWriter(opts.sources, {}, function(err, queueWriter) {
-  var pipe = process.stdin.pipe(require('split')());
-  pipe.on('data', function(line) {
-    if(line.length) {
+  var pipe = process.stdin.pipe(require("split")());
+  pipe.on("data", function(line) {
+    if (line.length) {
       queueWriter.putTile(line);
     }
   });
-  pipe.on('end', function() {
+  pipe.on("end", function() {
     queueWriter.tileStream.end();
   });
 });

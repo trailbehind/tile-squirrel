@@ -43,31 +43,31 @@ var argv = (process.env.TILESQUIRREL_OPTS || "")
 var opts = nomnom.parse(argv);
 
 switch (true) {
-case opts.version:
-  return process.exit();
+  case opts.version:
+    return process.exit();
 
-case !opts.config:
-  return nomnom.print(nomnom.getUsage());
+  case !opts.config:
+    return nomnom.print(nomnom.getUsage());
 
-case opts.stdin:
-  return runStdin(opts);
+  case opts.stdin:
+    return runStdin(opts);
 
-default:
-  return run(opts);
+  default:
+    return run(opts);
 }
 
 function run(opts) {
-  var cluster = require('cluster'),
-    numCPUs = require('os').cpus().length;
+  var cluster = require("cluster"),
+    numCPUs = require("os").cpus().length;
 
-  var numworkers = process.env.WORKER_COUNT || numCPUs; 
+  var numworkers = process.env.WORKER_COUNT || numCPUs;
   if (cluster.isMaster) {
     // Fork workers.
     for (var i = 0; i < numworkers; i++) {
       cluster.fork();
     }
-  
-    cluster.on('exit', (worker, code, signal) => {
+
+    cluster.on("exit", (worker, code, signal) => {
       console.log(`worker ${worker.process.pid} died`);
     });
   } else {
