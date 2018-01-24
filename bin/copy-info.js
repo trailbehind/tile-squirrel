@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 "use strict";
-var debug = debug = require("debug")("tile-squirrel-add-bbox"),
+var debug = (debug = require("debug")("tile-squirrel-add-bbox")),
   path = require("path"),
   Q = require("q");
 
@@ -30,12 +30,12 @@ var nomnom = require("nomnom")
 
 var opts = nomnom.parse();
 
-if(!opts.sources || opts.sources.length == 0) {
+if (!opts.sources || opts.sources.length == 0) {
   console.log("At least 1 source name is required.");
   process.exit(-1);
 }
 
-if(!opts.config) {
+if (!opts.config) {
   console.log("Config option is required.");
   process.exit(-1);
 }
@@ -52,31 +52,31 @@ for (var i = 0; i < opts.sources.length; i++) {
 
   var deferred = Q.defer();
   sourceLoadingPromises.push(deferred.promise);
-  tilelive.load(config[sourceKey]['source'], function(err, src){
-    if(err) {
-      console.log("Error loading source " + config[sourceKey]['source']);
+  tilelive.load(config[sourceKey]["source"], function(err, src) {
+    if (err) {
+      console.log("Error loading source " + config[sourceKey]["source"]);
       return deferred.reject(err);
     }
-    tilelive.load(config[sourceKey]['destination'], function(err, dest){
-      if(err) {
-        console.log("Error loading destination " + config[sourceKey]['destination']);
+    tilelive.load(config[sourceKey]["destination"], function(err, dest) {
+      if (err) {
+        console.log("Error loading destination " + config[sourceKey]["destination"]);
         return deferred.reject(err);
       }
-      src.getInfo(function(err, data){
-        if(err){
+      src.getInfo(function(err, data) {
+        if (err) {
           return deferred.reject(err);
         }
-        if(data) {
-          dest.startWriting(function(err){
-            if(err) {
+        if (data) {
+          dest.startWriting(function(err) {
+            if (err) {
               return deferred.reject(err);
             }
-            dest.putInfo(data, function(err){
-              if(err) {
+            dest.putInfo(data, function(err) {
+              if (err) {
                 return deferred.reject(err);
               }
-              dest.stopWriting(function(err){
-                if(err) {
+              dest.stopWriting(function(err) {
+                if (err) {
                   deferred.reject(err);
                 } else {
                   deferred.resolve();
@@ -89,11 +89,14 @@ for (var i = 0; i < opts.sources.length; i++) {
     });
   });
 }
-    
-Q.all(sourceLoadingPromises).then(function() {
-  process.exit(0);
-}, function(err) {
-  debug("Error loading sources");
-  console.log(err);
-  process.exit(-1);
-});
+
+Q.all(sourceLoadingPromises).then(
+  function() {
+    process.exit(0);
+  },
+  function(err) {
+    debug("Error loading sources");
+    console.log(err);
+    process.exit(-1);
+  }
+);
