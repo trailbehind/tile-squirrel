@@ -11,10 +11,10 @@ var nomnom = require("nomnom")
       help: "source names to queue",
       list: true
     },
-    file: {
-      abbr: "f",
-      metavar: "FILE",
-      help: "Read list from file. By default list is read from STDIN"
+    dryRun: {
+      abbr: "d",
+      flag: true,
+      help: "Dry run. Don't actually add messages to queue."
     },
     version: {
       abbr: "v",
@@ -34,7 +34,7 @@ if (!opts.sources || opts.sources.length == 0) {
   process.exit(-1);
 }
 
-new QueueWriter(opts.sources, {}, function(err, queueWriter) {
+new QueueWriter(opts.sources, {'dryRun':opts.dryRun}, function(err, queueWriter) {
   var pipe = process.stdin.pipe(require("split")());
   pipe.on("data", function(line) {
     if (line.length) {
