@@ -34,7 +34,7 @@ if (!opts.sources || opts.sources.length == 0) {
   process.exit(-1);
 }
 
-new QueueWriter(opts.sources, {'dryRun':opts.dryRun}, function(err, queueWriter) {
+new QueueWriter(opts.sources, { dryRun: opts.dryRun }, function(err, queueWriter) {
   var pipe = process.stdin.pipe(require("split")());
   pipe.on("data", function(line) {
     if (line.length) {
