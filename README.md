@@ -45,8 +45,8 @@ Usage: node add-tile-list.js [sources]... [options]
 sources     source names to queue
 
 Options:
-   -f FILE, --file FILE   Read list from file. By default list is read from STDIN
-   -v, --version          Show version info
+   -d, --dryRun    Dry run. Don't actually add messages to queue.
+   -v, --version   Show version info
 
 Read a list of tiles to queue for rendering.
 ```
