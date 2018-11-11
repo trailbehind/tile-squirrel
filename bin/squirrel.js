@@ -17,6 +17,11 @@ var nomnom = require("nomnom")
       help: "Require a specific tilelive module",
       list: true
     },
+    defer: {
+      abbr: "d",
+      flag: true,
+      help: "Defer loading sources until a message is received",
+    },
     version: {
       abbr: "v",
       flag: true,
