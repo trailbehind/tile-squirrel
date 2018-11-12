@@ -21,7 +21,7 @@ var nomnom = require("nomnom")
     defer: {
       abbr: "d",
       flag: true,
-      help: "Defer loading sources until a message is received",
+      help: "Defer loading sources until a message is received"
     },
     version: {
       abbr: "v",
