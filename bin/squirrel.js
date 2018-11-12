@@ -9,6 +9,7 @@ var nomnom = require("nomnom")
     config: {
       abbr: "c",
       metavar: "CONFIG",
+      required: true,
       help: "Provide a configuration file"
     },
     require: {
@@ -16,6 +17,11 @@ var nomnom = require("nomnom")
       metavar: "MODULE",
       help: "Require a specific tilelive module",
       list: true
+    },
+    defer: {
+      abbr: "d",
+      flag: true,
+      help: "Defer loading sources until a message is received"
     },
     version: {
       abbr: "v",
@@ -45,9 +51,6 @@ var opts = nomnom.parse(argv);
 switch (true) {
   case opts.version:
     return process.exit();
-
-  case !opts.config:
-    return nomnom.print(nomnom.getUsage());
 
   case opts.stdin:
     return runStdin(opts);
