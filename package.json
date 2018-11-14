@@ -1,6 +1,6 @@
 {
   "name": "tile-squirrel",
-  "version": "1.6.4",
+  "version": "1.6.5",
   "description": "Tile Squirrel reads from a rabbit queue and cache tiles from a tilelive source to a tilelive sink",
   "main": "lib/cacher.js",
   "bin": "bin/squirrel.js",
