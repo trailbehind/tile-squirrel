@@ -19,9 +19,9 @@
     "nomnom": "^1.8.1",
     "q": "1.4.x",
     "rabbit.js": "0.4.x",
-    "sphericalmercator": "1.x",
+    "@mapbox/sphericalmercator": "1.x",
     "split": "1.x",
-    "tilelive": "5.x",
+    "@mapbox/tilelive": "5.x",
     "tilelive-modules": "0.x"
   }
 }
