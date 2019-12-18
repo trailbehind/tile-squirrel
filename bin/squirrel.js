@@ -71,7 +71,7 @@ function run(opts) {
     }
 
     cluster.on("exit", (worker, code, signal) => {
-      // Retart the worker
+      // Restart the worker
       var worker = cluster.fork();
       console.log(`worker ${worker.process.pid} died and has been replaced by ${worker.process.pid}`);
     });
