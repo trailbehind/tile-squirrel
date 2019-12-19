@@ -64,16 +64,21 @@ function run(opts) {
     numCPUs = require("os").cpus().length;
 
   var numworkers = process.env.WORKER_COUNT || numCPUs;
+  var failureCount = 0;
   if (cluster.isMaster) {
     // Fork workers.
     for (var i = 0; i < numworkers; i++) {
       cluster.fork();
     }
 
-    cluster.on("exit", (worker, code, signal) => {
-      // Restart the worker
-      var worker = cluster.fork();
-      console.log(`worker ${worker.process.pid} died and has been replaced by ${worker.process.pid}`);
+    cluster.on("exit", (oldWorker, code, signal) => {
+      failureCount += 1;
+      if (failureCount < numworkers * 3) { // Dont restart forever, only allow 3 restarts per worker.
+        var worker = cluster.fork();
+        console.log(`worker ${oldWorker.process.pid} died and has been replaced by ${worker.process.pid}`);
+      } else {
+        console.log(`worker ${oldWorker.process.pid} died. Not starting a new worker because of too many failures.`);
+      }
     });
   } else {
     console.log("Starting worker");
