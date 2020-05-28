@@ -14,14 +14,14 @@
   "homepage": "https://github.com/trailbehind/tile-squirrel/",
   "scripts": {},
   "dependencies": {
+    "@mapbox/sphericalmercator": "1.x",
+    "@mapbox/tilelive": "5.x",
     "async": "^2.3.0",
     "debug": "^2.1.0",
     "nomnom": "^1.8.1",
     "q": "1.4.x",
     "rabbit.js": "0.4.x",
-    "@mapbox/sphericalmercator": "1.x",
     "split": "1.x",
-    "@mapbox/tilelive": "5.x",
     "tilelive-modules": "0.x"
   }
 }

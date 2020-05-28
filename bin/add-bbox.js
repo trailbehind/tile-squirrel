@@ -4,7 +4,7 @@
 var async = require("async"),
   debug = require("debug")("tile-squirrel-add-bbox"),
   path = require("path"),
-  SphericalMercator = require("sphericalmercator"),
+  SphericalMercator = require("@mapbox/sphericalmercator"),
   QueueWriter = require("../lib/queueWriter");
 
 var nomnom = require("nomnom")
